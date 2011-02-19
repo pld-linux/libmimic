@@ -2,14 +2,18 @@ Summary:	Mimic v2.x (ML20) video encoding/decoding library
 Summary(pl.UTF-8):	Biblioteka kodująca/dekodująca obraz Mimic v2.x
 Name:		libmimic
 Version:	1.0.4
-Release:	1
+Release:	2
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/farsight/%{name}-%{version}.tar.gz
 # Source0-md5:	94f0dbb1d3c253201553a4069555fb84
+Patch0:		link.patch
 URL:		http://farsight.sourceforge.net/
+BuildRequires:	autoconf >= 2.53
+BuildRequires:	automake
 BuildRequires:	doxygen
 BuildRequires:	glib2-devel >= 2.0
+BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -50,8 +54,14 @@ Statyczna biblioteka libmimic.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
 %configure
 %{__make}
 
@@ -60,6 +70,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -77,7 +89,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc doc/api/html/*
 %attr(755,root,root) %{_libdir}/libmimic.so
-%{_libdir}/libmimic.la
 %{_includedir}/mimic.h
 %{_pkgconfigdir}/libmimic.pc
 

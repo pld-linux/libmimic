@@ -1,0 +1,10 @@
+diff -urN libmimic-1.0.4/src/Makefile.am libmimic-1.0.4.new//src/Makefile.am
+--- libmimic-1.0.4/src/Makefile.am	2006-02-07 10:53:40.000000000 +0100
++++ libmimic-1.0.4.new//src/Makefile.am	2011-02-19 19:48:32.680036931 +0100
+@@ -21,3 +21,6 @@
+ 	-version-info $(MIMIC_CURRENT):$(MIMIC_REVISION):$(MIMIC_AGE) \
+ 	-export-symbols-regex "^[^_].*"
+ 
++libmimic_la_LIBADD = \
++	@GLIB_LIBS@ \
++	-lm
