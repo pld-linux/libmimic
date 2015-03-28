@@ -2,7 +2,7 @@ Summary:	Mimic v2.x (ML20) video encoding/decoding library
 Summary(pl.UTF-8):	Biblioteka kodująca/dekodująca obraz Mimic v2.x
 Name:		libmimic
 Version:	1.0.4
-Release:	2
+Release:	3
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/farsight/%{name}-%{version}.tar.gz
